@@ -91,7 +91,7 @@ class OAIImageAnalysis:
         self.reset_coord = reset_coord
         self.normalize_intensity = normalize_intensity
 
-    def preprocess(self, oai_image, overwrite=False):
+    def preprocess(self, oai_image, overwrite=False, ipfs=False):
         """
 
         :param oai_image: OAIImage object
