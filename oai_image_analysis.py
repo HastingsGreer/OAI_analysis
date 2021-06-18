@@ -175,6 +175,11 @@ class OAIImageAnalysis:
                 assert dfv[4] == 'bafybeia4pjdi47ro4v7tvbv24yuackxw23v7l4opkhsyrhjkoovjqcrmxy'
                 assert dfv[5] == 'Image'
                 assert dfv[6] == 'SEG_3D_DESS_1' 
+                itk.imwrite(image, "/tmp.nrrd")
+                reader = sitk.ImageFileReader()
+                reader.SetImageIO("NrrdImageIO")
+                reader.SetFileName("/tmp.nrrd")
+                image = reader.Execute();
             # bias field correction
             if self.bias_correct:
                 # if want to use all voxels
