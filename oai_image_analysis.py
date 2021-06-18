@@ -5,6 +5,16 @@ Created by zhenlinxu on 01/04/2019
 import os
 import sys
 
+import json
+from pathlib import Path
+
+import fsspec
+from ipfsspec import IPFSFileSystem
+import xarray as xr
+import zarr
+import itk
+import pandas as pd
+
 sys.path.append(os.path.realpath(".."))
 from multiprocessing import Pool
 from functools import partial
@@ -115,17 +125,6 @@ class OAIImageAnalysis:
                 image = reader.Execute()
                 image = sitk.Cast(image, sitk.sitkFloat32)
             else:
-                import sys
-                import json
-                from pathlib import Path
-
-                import fsspec
-                from ipfsspec import IPFSFileSystem
-                import xarray as xr
-                import zarr
-                import itk
-                import pandas as pd
-                import numpy as np
 
                 with fsspec.open("ipfs://bafybeiahpd4hu2kmn7wahpya7mjg2taxrnyzoinbogfihczbk4lea7afx4/index.json") as f:
                     DATA_INDEX = json.loads(f.read().decode())
