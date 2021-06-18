@@ -115,7 +115,6 @@ class OAIImageAnalysis:
                 image = reader.Execute()
                 image = sitk.Cast(image, sitk.sitkFloat32)
             else:
-                import os
                 import sys
                 import json
                 from pathlib import Path
