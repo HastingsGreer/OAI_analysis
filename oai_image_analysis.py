@@ -123,7 +123,6 @@ class OAIImageAnalysis:
                 print("Read {} DICOM slices in {}".format(len(dicom_names), oai_image.raw_folder))
                 reader.SetFileNames(dicom_names)
                 image = reader.Execute()
-                image = sitk.Cast(image, sitk.sitkFloat32)
             else:
 
                 with fsspec.open("ipfs://bafybeiahpd4hu2kmn7wahpya7mjg2taxrnyzoinbogfihczbk4lea7afx4/index.json") as f:
@@ -180,6 +179,7 @@ class OAIImageAnalysis:
                 reader.SetImageIO("NrrdImageIO")
                 reader.SetFileName("/tmp.nrrd")
                 image = reader.Execute();
+            image = sitk.Cast(image, sitk.sitkFloat32)
             # bias field correction
             if self.bias_correct:
                 # if want to use all voxels
