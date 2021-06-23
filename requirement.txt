@@ -4,7 +4,7 @@ scikit-learn>=0.19.1
 scikit-image>=0.14.0
 tensorboard>=1.12
 tensorboardX>=1.2
-simpleITK>=1.0.1
+simpleITK==1.2
 pandas>=0.23.0
 torch>=0.4.0
 torchvision>=0.2.1
