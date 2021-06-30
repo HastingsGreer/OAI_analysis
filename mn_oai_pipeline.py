@@ -273,6 +273,67 @@ def read_pid_from_file(pid_file):
     return pids
 
 
+
+HELP = dict()
+DEFAULT = dict()
+
+HELP['use_nifty_reg'] = 'If specified (set to True) uses nifty reg to perform registrations, otherwise uses a deep-network based registration.'
+DEFAULT['use_nifty_reg'] = False
+
+HELP['seed'] = 'Sets the random seed which affects data shuffling.'
+DEFAULT['seed'] = 2018
+
+HELP['overwrite'] = 'If specified (set to True) overwrites results; otherwise they are not recomputed if they exist'
+DEFAULT['overwrite'] = False
+
+HELP['config'] = 'The main json configuration file that can be used to define the settings.'
+DEFAULT['config'] = '~/.oai_analysis_settings.json'
+
+HELP['config_out'] = 'The used json configuration file that the configuration should be written to in the end.'
+DEFAULT['config_out'] = None
+
+HELP['config_comment_out'] = 'The used json configuration file that the configuration comments should be written to in the end.'
+DEFAULT['config_comment_out'] = None
+
+HELP['output_directory'] = 'Directory where the analysis results will be stored.'
+DEFAULT['output_directory'] = '/net/biag-raid1/playpen/oai_analysis_results'
+
+HELP['atlas_image'] = 'Path to the cartilage atlas image; should be called atlas.nii.gz'
+DEFAULT['atlas_image'] = '/playpen/oai/OAI_analysis/atlas/atlas_60_LEFT_baseline_NMI/atlas.nii.gz'
+
+HELP['oai_data_directory'] = 'Directory where the OAI data can be found.'
+DEFAULT['oai_data_directory'] = '/net/biag-raid/playpen/data/OAI'
+
+HELP['nifty_reg_directory'] = 'Directory where the nifty-reg binaries live (if niftyreg is used).'
+DEFAULT['nifty_reg_directory'] = '/playpen/oai/niftyreg/install/bin'
+
+HELP['avsm_directory'] = 'Directory which contains the registration_net scripts; should be ... /easyreg'
+DEFAULT['avsm_directory'] = '/playpen/oai/easyreg'
+
+HELP['data_division_interval'] = 'Specifies how the data is subdivided. E.g., if one wants to run on 4 machines simultaneously, set it to 4.'
+DEFAULT['data_division_interval'] = 1
+
+HELP['data_division_offset'] = 'Specified index offset for data subdivision, i.e., if you run on 4 machines, these machines should get offsets 0, 1, 2, and 3 respectively.'
+DEFAULT['data_division_offset'] = 0
+
+HELP['progression_cohort_only'] = 'If set, only the progression cohort will be analyzed.'
+DEFAULT['progression_cohort_only'] = False
+
+HELP['time_point'] = 'Can be set to 0, 12, 24, 36, 48, 72, or 96'
+DEFAULT['time_point'] = None
+
+HELP['knee_type'] = 'Can be set to LEFT_KNEE, RIGHT_KNEE, BOTH_KNEES. Specifies what knees should be analyzed.'
+DEFAULT['knee_type'] = 'BOTH_KNEES'
+
+HELP['logging_filename'] = 'Log file for the analysis which records possible issues while running.'
+DEFAULT['logging_filename'] = 'oai_analysis_log.log'
+
+HELP['pid_file'] = 'text file with pids of patient to be processed.'
+DEFAULT['pid_file'] = '/net/biag-raid1/playpen/zhenlinx/pid_600.txt'
+
+HELP['python_executable'] = 'python executable to run the registrations with. In principle this is set automatically, but this automatic setting does not always work when running on a cluster.'
+DEFAULT['python_executable'] = sys.executable
+
 if __name__ == '__main__':
 
     import argparse
@@ -280,67 +341,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Performs analysis of the OAI data')
 
     # specify help strings and default values
-
-    HELP = dict()
-    DEFAULT = dict()
-
-    HELP['use_nifty_reg'] = 'If specified (set to True) uses nifty reg to perform registrations, otherwise uses a deep-network based registration.'
-    DEFAULT['use_nifty_reg'] = False
-
-    HELP['seed'] = 'Sets the random seed which affects data shuffling.'
-    DEFAULT['seed'] = 2018
-
-    HELP['overwrite'] = 'If specified (set to True) overwrites results; otherwise they are not recomputed if they exist'
-    DEFAULT['overwrite'] = False
-
-    HELP['config'] = 'The main json configuration file that can be used to define the settings.'
-    DEFAULT['config'] = '~/.oai_analysis_settings.json'
-
-    HELP['config_out'] = 'The used json configuration file that the configuration should be written to in the end.'
-    DEFAULT['config_out'] = None
-
-    HELP['config_comment_out'] = 'The used json configuration file that the configuration comments should be written to in the end.'
-    DEFAULT['config_comment_out'] = None
-
-    HELP['output_directory'] = 'Directory where the analysis results will be stored.'
-    DEFAULT['output_directory'] = '/net/biag-raid1/playpen/oai_analysis_results'
-
-    HELP['atlas_image'] = 'Path to the cartilage atlas image; should be called atlas.nii.gz'
-    DEFAULT['atlas_image'] = '/playpen/oai/OAI_analysis/atlas/atlas_60_LEFT_baseline_NMI/atlas.nii.gz'
-
-    HELP['oai_data_directory'] = 'Directory where the OAI data can be found.'
-    DEFAULT['oai_data_directory'] = '/net/biag-raid/playpen/data/OAI'
-
-    HELP['nifty_reg_directory'] = 'Directory where the nifty-reg binaries live (if niftyreg is used).'
-    DEFAULT['nifty_reg_directory'] = '/playpen/oai/niftyreg/install/bin'
-
-    HELP['avsm_directory'] = 'Directory which contains the registration_net scripts; should be ... /easyreg'
-    DEFAULT['avsm_directory'] = '/playpen/oai/easyreg'
-
-    HELP['data_division_interval'] = 'Specifies how the data is subdivided. E.g., if one wants to run on 4 machines simultaneously, set it to 4.'
-    DEFAULT['data_division_interval'] = 1
-
-    HELP['data_division_offset'] = 'Specified index offset for data subdivision, i.e., if you run on 4 machines, these machines should get offsets 0, 1, 2, and 3 respectively.'
-    DEFAULT['data_division_offset'] = 0
-
-    HELP['progression_cohort_only'] = 'If set, only the progression cohort will be analyzed.'
-    DEFAULT['progression_cohort_only'] = False
-
-    HELP['time_point'] = 'Can be set to 0, 12, 24, 36, 48, 72, or 96'
-    DEFAULT['time_point'] = None
-
-    HELP['knee_type'] = 'Can be set to LEFT_KNEE, RIGHT_KNEE, BOTH_KNEES. Specifies what knees should be analyzed.'
-    DEFAULT['knee_type'] = 'BOTH_KNEES'
-
-    HELP['logging_filename'] = 'Log file for the analysis which records possible issues while running.'
-    DEFAULT['logging_filename'] = 'oai_analysis_log.log'
-
-    HELP['pid_file'] = 'text file with pids of patient to be processed.'
-    DEFAULT['pid_file'] = '/net/biag-raid1/playpen/zhenlinx/pid_600.txt'
-
-    HELP['python_executable'] = 'python executable to run the registrations with. In principle this is set automatically, but this automatic setting does not always work when running on a cluster.'
-    DEFAULT['python_executable'] = sys.executable
-
     # create parser parameters
 
     parser.add_argument('--use_nifty_reg', action='store_true', help=HELP['use_nifty_reg'])

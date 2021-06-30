@@ -174,10 +174,10 @@ class OAIImageAnalysis:
                 assert dfv[4] == 'bafybeia4pjdi47ro4v7tvbv24yuackxw23v7l4opkhsyrhjkoovjqcrmxy'
                 assert dfv[5] == 'Image'
                 assert dfv[6] == 'SEG_3D_DESS_1' 
-                itk.imwrite(image, "/tmp.nrrd")
+                itk.imwrite(image, "tmp.nrrd")
                 reader = sitk.ImageFileReader()
                 reader.SetImageIO("NrrdImageIO")
-                reader.SetFileName("/tmp.nrrd")
+                reader.SetFileName("tmp.nrrd")
                 image = reader.Execute();
             image = sitk.Cast(image, sitk.sitkFloat32)
             # bias field correction
