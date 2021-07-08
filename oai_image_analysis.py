@@ -28,6 +28,11 @@ from shape_analysis.cartilage_shape_processing import get_cartilage_surface_mesh
     map_thickness_to_atlas_mesh, surface_distance, map_thickness_to_2D_projection
 from data.pre_process import label2image, image_normalize, reset_sitk_image_coordinates, flip_left_right
 
+
+def map_patient_number_to_ipfs_id(patient):
+    patient_cid = subprocess.check_output(['ipfs', 'add', '--cid-version', '1', '--raw-leaves', '-Q'], input=str(patient).encode()).decode().strip()
+    return patient_cid
+
 class OAIImageAnalysis:
     def __init__(self,use_nifti=True):
         self.segmenter = Segmenter3DInPatchClassWise()
