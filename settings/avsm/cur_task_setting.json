@@ -36,7 +36,7 @@
         ],
         "model": "reg_net",
         "model_folder_path": "",
-        "model_path": "/nas/longleaf/home/mn/python/registration_net/mermaid/pretrained/pre_trained_model",
+        "model_path": "/media/data/OAI_analysis/pre_trained_model",
         "n_in_channel": 1,
         "method_name": "mermaid",
         "optim": {
@@ -70,6 +70,7 @@
                 "epoch_activate_sym": -1,
                 "epoch_activate_sym_loss": -1,
                 "initial_reg_factor": 10,
+                "affine_fc_size":432,
                 "min_reg_factor": 1e-07,
                 "reset_lr_for_multi_step": true,
                 "using_complex_net": true
