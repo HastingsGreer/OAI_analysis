@@ -128,6 +128,9 @@ venv.bak/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+*.swp
+**.swp
+**.swo
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
